@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Table</title>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    @*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>*@
+</head>
+<style>
+    body{
+        background: url('@Url.Content("~/Content/img/smile.jpg")') no-repeat top;
+    }
+</style>
+<body style="height:725px">
+    <nav class="navbar bg-warning bg-opacity-25 table-bordered border-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">@ViewBag.Title</span>
+        </div>
+    </nav>
+    <div class="row h-100">
+        <div class="col-lg-2 h-100">
+            <a class="btn btn-outline-dark w-100" href="@Url.Action("Index","Home")">Student List</a>
+            <a class="btn btn-outline-dark w-100" href="@Url.Action("Index","Home","Year")">Year Level</a>
+            <a class="btn btn-outline-dark w-100" href="@Url.Action("Index","Home","Sections")">Sections</a>
+        </div>
+        <div class="col-10 h-100">
+            <div class="card h-100">
+                <div class="card-body">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#addSubjectButton").click(function () {
+
+                var newSubjectCode = $("#newSubjectCode").val()x``;
+                var newSubjectName = $("#newSubjectName").val();
+                var newUnit = $("#newUnit").val();
+                var newDay = $("#newDay").val();
+                var newTime = $("#newTime").val();
+
+
+                var subjectData = {
+                    newSubjectCode: newSubjectCode,
+                    newSubjectName: newSubjectName,
+                    newUnit: newUnit,
+                    newDay: newDay,
+                    newTime: newTime
+
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Insert",
+                    data: subjectData,
+                    success: function () {
+
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("An error occured while adding the student.");
+                    }
+                });
+            });
+
+        });
+
+        function SendToModal(SubjectCode) {
+            document.getElementById("updateSubjectCode").value = SubjectCode;
+        }
+        $(document).ready(function () {
+            $("#updateSubjectButton").click(function () {
+
+                var newSubjectCode = $("#updateSubjectCode").val();
+                var newSubjectName = $("#updateSubjectName").val();
+                var newUnit = $("#updateUnit").val();
+                var newDay = $("#updateDay").val();
+                var newTime = $("#updateTime").val();
+
+                var subjectData = {
+                    newSubjectCode: newSubjectCode,
+                    newSubjectName: newSubjectName,
+                    newUnit: newUnit,
+                    newDay: newDay,
+                    newTime: newTime
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Update",
+                    data: subjectData,
+                    success: function () {
+
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("An error occurred while updating the subject.");
+                    }
+                })
+            });
+        });
+    </script>
+
+</body>
+
+
+
+
+</html>

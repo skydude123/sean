@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Student Information";
+}
+
+<table class="table table-bordered table-dark">
+    <thead>
+        <tr>
+            <th>
+                Subject Code <!-- table column header -->
+            </th>
+            <th>
+                Subject Name <!-- table column header -->
+            </th>
+            <th>
+                Unit <!-- table column header-->
+            </th>
+            <th>
+                Day <!-- table column header -->
+            </th>
+            <th>
+                Time <!-- table column header -->
+            </th>
+
+            <th>
+                Edit <!-- table column header -->
+            </th>
+
+            <th>
+                Status <!-- table column header -->
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subject in Model)
+        {
+            <tr>
+                <td>@subject["SubjectCode"]</td>
+                <!-- display the student ID from the dictionary -->
+                <td>@subject["SubjectName"]</td>
+                <!-- display the First Name from the dictionary -->
+                <td>@subject["Unit"]</td>
+                <!--display the Last Name from the dictionary -->
+                <td>@subject["Day"]</td>
+                <!-- display the Gender from the dictionary -->
+                <td>@subject["Time"]</td>
+                <!-- display the Gender from the dictionary -->
+
+                <td>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" id="updatebutton" onclick="SendToModal(`@subject["SubjectCode"]`)">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#updateModal" id="updatebutton" onclick="SendToModal(`@subject["SubjectCode"]`)">
+                        Archive
+                    </button>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateModal" id="updatebutton" onclick="SendToModal(`@subject["SubjectCode"]`)">
+                        Details
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal" id="updatebutton" onclick="SendToModal(`@subject["SubjectCode"]`)">
+                        Active
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<section>
+    
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Subject
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Subject</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="card">
+                    <label for="newSubjectCode">Subject Code: </label>
+                    <input type="text" name="newSubjectCode" id="newSubjectCode" required>
+
+                    <label for="newSubjectName">Subject Name: </label>
+                    <input type="text" name="newSubjectName" id="newSubjectName" required>
+
+                    <label for="newUnit">Unit:</label>
+                    <input type="text" name="newUnit" id="newUnit" required>
+
+                    <label for="newDay">Day: </label>
+                    @*<input type="text" name="newDay" id="newDay" required>*@
+                    <select name="newDay" id="newDay" required>
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wedesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+
+                        <label for="newTime">Time: </label>
+                        <input type="datetime-local" name="newTime" id="newTime" required>
+
+
+                        @*<button class="btn btn-primary" id="addStudentButton">Add Student</button>*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-success" id="addSubjectButton">Add Subject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updateModalLabel">Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card" style="background-color:lightgray;">
+                        <div class="card-body">
+                            <label for="updateSubjectCode" class="form-label">Subject Code:</label>
+                            <input type="text" class="form-control" id="updateSubjectCode" name="updateSubjectCode" required disabled />
+
+                            <label for="updateSubjectName" class="form-label">Subject Name:</label>
+                            <input type="text" class="form-control" id="updateSubjectName" name="updateSubjectName" required />
+
+                            <label for="updateUnit" class="form-label">Unit:</label>
+                            <input type="text" class="form-control" id="updateUnit" name="updateUnit" required />
+
+                            <label for="updateDay" class="form-label">Day:</label>
+                            <input type="text" class="form-control" id="updateDay" name="updateDay" required />
+
+                            <label for="updateTime" class="form-label">Time:</label>
+                            <input type="text" class="form-control" id="updateTime" name="updateTime" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-secondary" id="updateSubjectButton">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
